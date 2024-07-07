@@ -4,16 +4,17 @@ const { connectToDb, getDb } = require("./db");
 const { ObjectId } = require("mongodb");
 const nodemailer = require("nodemailer");
 const app = express();
-require("dotenv").config();
+const port = process.env.PORT || 9000;
 const PASSWORD = process.env.PASSWORD;
+require("dotenv").config();
 let db;
 app.use(express.json());
 app.use(cors());
 
 connectToDb((err) => {
   if (!err) {
-    app.listen(9000, "0.0.0.0", () => {
-      console.log(`Server is running on http://0.0.0.0:9000}`);
+    app.listen(port, () => {
+      console.log(`Server is running on ${port}`);
     });
     db = getDb();
   } else {
